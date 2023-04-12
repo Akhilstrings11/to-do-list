@@ -15,7 +15,7 @@ function ToDoList() {
     }
     return (
         <div>
-            <div>
+            <div className='itemsContainer'>
                 <form onSubmit={addTask}>
                     <label htmlFor="inputText">Add Task:-</label>
                     <input 

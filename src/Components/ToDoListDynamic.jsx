@@ -3,44 +3,54 @@ import React, { useState } from 'react'
 function ToDoListDynamic() {
     const initialInputTask = {inputText : ""}
 
-    const [ToDoList, setToDoList] = useState(initialInputTask)
-    const [allToDoList, setAllToDoList] = useState(
-        []
-    )
+    const [toDoList, setToDoList] = useState(initialInputTask)
+    const [allToDoList, setAllToDoList] = useState([])
+    const date = new Date()
 
     const addTask = (event) => {
         event.preventDefault()
-        console.log(ToDoList)
+        console.log(toDoList)
         setToDoList(initialInputTask)
-        setAllToDoList([...allToDoList, ToDoList])
+        setAllToDoList([...allToDoList, {...toDoList, createdDate : date.getMilliseconds()} ])
     }
 
     const handleinputfield = (event) => {
         console.log(event.target.name, event.target.value)
         setToDoList({
-            ...ToDoList,
+            ...toDoList,
             [event.target.name] : event.target.value
         })
+    }
+
+    const deleteTask = (createdDate) => {
+        console.log("deleted task", createdDate)
+        const filteredTasks = allToDoList.filter((item,index) => item.createdDate !== createdDate )
+        setAllToDoList(filteredTasks)
     }
 
     return (
         <div>
             <div>
-                <div>
+                <div className='itemsContainerr'>
                     <form onSubmit={addTask}>
                         <label htmlFor="inputText">Add Task:-</label>
-                        <input 
+                        <input
                         type="text" 
                         id='inputText' 
                         name='inputText'
-                        value={ToDoList.inputText}
+                        value={toDoList.inputText}
                         onChange = {handleinputfield}
                         />
-                        <input type="submit" value= "Add+" />
-                        <input type="reset" />
+                        <input className='button' type="submit" value= "Add+" />
+                        <input className='button' type="reset" onClick={() => setToDoList(initialInputTask) } />
                     </form>
-                    {allToDoList.map((item,index) => <h1>task:-{item.inputText}</h1> )}
                 </div>
+                {allToDoList.map((item) => <div className='list'>
+                                                    <span>
+                                                    <li className='task'>{item.inputText}</li>
+                                                    </span>
+                                                    <button onClick={ () => deleteTask (item.createdDate)}> X </button>
+                                                     </div>)}
             </div>
         </div>
     )

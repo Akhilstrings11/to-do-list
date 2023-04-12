@@ -36,3 +36,37 @@
     transform: rotate(360deg);
   }
 }
+
+
+.itemsContainerr{
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+form{
+
+  /* padding: 5px; */
+}
+input{
+  padding: 6px;
+  margin: 10px;
+}
+
+
+ .list{
+  display: flex;
+  justify-content: center;
+  padding: 3px;
+ }
+
+ .task{
+  padding: 3px;
+  margin-right: 10px;
+ }
+
+ span{
+  font-size: 25px;
+  font-weight: 700;
+ }
+ 
