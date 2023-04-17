@@ -5,6 +5,7 @@ function ToDoListDynamic() {
 
     const [toDoList, setToDoList] = useState(initialInputTask)
     const [allToDoList, setAllToDoList] = useState([])
+    const [completedTodos, setCompletedTodos] = useState([])
     const date = new Date()
 
     const addTask = (event) => {
